@@ -4,7 +4,7 @@ from pathlib import Path
 def make_folders(problem: str):
     number, title = problem.split(".", 1)
 
-    slug = title.strip().lower().replace(" ", "-")
+    slug = title.strip().lower().replace(" ", "-").replace("/", "-")
     folder_name = f"{number.strip()}-{slug}"
 
     sql_dir = Path("SQL") / folder_name
