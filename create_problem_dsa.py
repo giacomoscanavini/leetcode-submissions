@@ -1,4 +1,4 @@
-import sys
+import subprocess, sys
 from pathlib import Path
 
 def make_folders(problem: str):
@@ -13,6 +13,8 @@ def make_folders(problem: str):
     (dsa_dir / "submission-1.py").touch()
 
     print(f"Created {dsa_dir}/submission-1.py")
+
+    subprocess.run(['code', f'{dsa_dir}/submission-1.py'])
 
 
 if __name__ == "__main__":
