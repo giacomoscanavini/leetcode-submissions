@@ -1,4 +1,4 @@
-import sys
+import subprocess, sys
 from pathlib import Path
 
 def make_folders(problem: str):
@@ -15,6 +15,9 @@ def make_folders(problem: str):
 
     print(f"Created {sql_dir}/submission-1.sql")
     print(f"Created {sql_dir}/submission-1.py")
+
+    subprocess.run(['code', f'{sql_dir}/submission-1.sql'])
+    subprocess.run(['code', f'{sql_dir}/submission-1.py'])
 
 
 if __name__ == "__main__":
