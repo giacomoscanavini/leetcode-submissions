@@ -6,6 +6,8 @@ class Solution:
             if x - 1 > 0: return x * factorial(x - 1)
             else: return 1
 
+        # values_per_block defines the number of values with identical starting digit 
+        # (123, 132) is a block, (213, 231) is another block, etc.
         values_per_block = factorial(n) // n
         k -= 1
 
