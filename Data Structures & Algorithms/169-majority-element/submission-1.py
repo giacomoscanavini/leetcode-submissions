@@ -1,13 +1,10 @@
 class Solution:
     def majorityElement(self, nums: list[int]) -> int:
-        n = len(nums)
-        m = int(n // 2 + n % 2)
-
-        hash_table = {}
-
-        for i in range(n):
-            hash_table[nums[i]] = hash_table.get(nums[i], 0) + 1
-
-        for key, value in hash_table.items():
-            if value >= m: 
-                return key
+        # Time complexity: Loop over nums and hash map O(n)
+        # Space complexity: Create hash_map up to O(n)
+        hash_map = {}
+        for n in nums:
+            hash_map[n] = hash_map.get(n, 0) + 1
+        
+        for key,val in hash_map.items():
+            if val >= len(nums)//2: return key

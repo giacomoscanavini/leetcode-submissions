@@ -1,30 +1,23 @@
 class Solution:
     def removeDuplicates(self, nums: list[int]) -> int:
-        m = len(nums)
-        i, k = 0, 0
-        count = 0
-
-        while m > 0:
-            if i == 0:
-                k += 1
-                i += 1
-                m -= 1
-                count += 1
-
-            else:
-                if nums[i] == nums[i-1]:
-                    m -= 1
-                    count += 1
-                    if count < 3: 
-                        k += 1
-                        i += 1
-                    else: 
-                        del nums[i]
-                        nums.append('_') 
-                else:
-                    m -= 1
-                    count = 1
+        # Time complexity: Loop over nums + Rereferencing O(n)
+        # Space complexity: Modify in-place O(1)
+        previous = ''
+        k = 0
+        r = len(nums) - 1
+        current_count = 0
+        while r >= 0:
+            if nums[r] == previous:
+                if current_count < 2: 
+                    current_count += 1
                     k += 1
-                    i += 1
+                else: 
+                    nums.pop(r)
+            else:
+                previous = nums[r]
+                current_count = 1
+                k += 1
 
+            r -= 1
+        
         return k
