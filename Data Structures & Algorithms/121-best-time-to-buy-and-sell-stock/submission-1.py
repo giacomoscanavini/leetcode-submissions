@@ -1,16 +1,13 @@
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
-        if len(prices) == 1: return 0
-
-        maximum = 0
-        buy = prices[0]
-        sell = 0
-        for i in range(1, len(prices)):
-            if prices[i] - buy > maximum: 
-                maximum = prices[i] - buy
-                sell = prices[i]
-                
+        # Time complexity: Loop over prices O(n)
+        # Space complexity: Fixed number of variables O(1)
+        buy = float('inf')
+        maxProfit = 0
+        for i in range(len(prices)):
             if prices[i] < buy: 
                 buy = prices[i]
-                
-        return maximum
+            else:
+                maxProfit = max(maxProfit, prices[i] - buy)
+
+        return maxProfit
