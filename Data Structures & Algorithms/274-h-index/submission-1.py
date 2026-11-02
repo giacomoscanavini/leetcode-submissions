@@ -1,18 +1,12 @@
 class Solution:
     def hIndex(self, citations: list[int]) -> int:
-        if len(citations) == 1: 
-            if citations[0] == 0: return 0
-            else: return 1
-
-        citations = sorted(citations, reverse=True)
+        # Time complexity: Sorting and looping over the array O(n logn)
+        # Space complexity: Creating sorted array O(n)
+        citations.sort(reverse=True)
         h = 0
-        for i,cit in enumerate(citations):
-            if cit >= i+1:
-                h += 1
+        for cit in citations:
+            if cit > h: h += 1
             else:
                 break
 
-        return h 
-            
-
-        
+        return h
