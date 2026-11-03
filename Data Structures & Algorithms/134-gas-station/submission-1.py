@@ -1,17 +1,18 @@
 class Solution:
     def canCompleteCircuit(self, gas: list[int], cost: list[int]) -> int:
-        start_idx = 0
-        total_fuel = 0
-        current_fuel = 0
+        # Time complexity: Loop over the gas stations O(n)
+        # Space complexity: Fixed number of variables O(1)
+        start = 0
+        available_gas = 0
+        total_gas = 0
+        for i,(g,c) in enumerate(zip(gas, cost)):
+            available_gas += (g - c)
+            total_gas += (g - c)
+            if available_gas < 0:
+                available_gas = 0
+                start = i + 1 
 
-        for i in range(len(gas)):
-            fuel = gas[i] - cost[i]
-            total_fuel += fuel
-            current_fuel += fuel
-
-            if current_fuel < 0:
-                current_fuel = 0
-                start_idx = i + 1
-
-        if total_fuel < 0: return -1
-        else: return start_idx
+        if total_gas >= 0: 
+            return start
+        else:
+            return -1
