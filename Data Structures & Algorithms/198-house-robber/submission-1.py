@@ -1,13 +1,17 @@
 class Solution:
     def rob(self, nums: list[int]) -> int:
-        if len(nums) == 1: 
-            return nums[0]
-        elif len(nums) == 2: 
-            return max(nums)
-        else:
-            robA, robB = nums[0], max(nums[0], nums[1])
+        # Time complexity: Loop over nums O(n)
+        # Space complexity: Create fixed number of variables O(1) 
+        # n is len(nums)
 
-            for i in range(2, len(nums)):
-                robA, robB = robB, max(robA + nums[i], robB)
+        # Edge cases
+        if len(nums) == 1: return nums[0]
 
-            return robB
+        # Define starting houses
+        a, b = nums[0], nums[1]
+        for i in range(2, len(nums)):
+            # Apply recursiveness in which we store the path with most money in a
+            # And we update the one path that is at least 1 house away
+            a, b = max(a, b), a + nums[i]
+
+        return max(a, b)
