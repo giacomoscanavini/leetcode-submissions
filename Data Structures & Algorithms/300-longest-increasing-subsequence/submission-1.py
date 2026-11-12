@@ -18,3 +18,28 @@ class Solution:
 
         # The longest is the max in the array of states
         return max(dp)
+
+
+
+
+        # SOLUTION WITH BINARY SEARCH (OPTIMAL TIME COMPLEXITY)
+        def binary_search_left_index(arr, n):
+            l, r = 0, len(arr)-1
+            while l <= r:
+                m = l + (r-l)//2
+                if n > arr[m]:
+                    l = m + 1
+                else:
+                    r = m - 1
+            return l
+
+        subArr = []
+
+        for n in nums:
+            optimal_index = binary_search_left_index(subArr, n)
+            if optimal_index == len(subArr):
+                subArr.append(n)
+            else:
+                subArr[optimal_index] = n
+
+        return len(subArr)
