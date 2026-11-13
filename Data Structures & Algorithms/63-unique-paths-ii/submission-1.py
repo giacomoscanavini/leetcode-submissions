@@ -1,27 +1,19 @@
 class Solution:
     def uniquePathsWithObstacles(self, obstacleGrid: list[list[int]]) -> int:
-        nrows = len(obstacleGrid)
-        ncols = len(obstacleGrid[0])
-
-        if obstacleGrid[0][0] == 1: return 0
-
-        row_above = [0] * ncols
-        row_above[0] = 1
-
-        for j in range(1, ncols):
-            if obstacleGrid[0][j] == 0:
-                row_above[j] = row_above[j - 1]
-
-        for i in range(1, nrows):
-            row = [0] * ncols
-
-            if obstacleGrid[i][0] == 0:
-                row[0] = row_above[0]
-
-            for j in range(1, ncols):
+        # Time complexity: Loop over all cells of grid O(m * n)
+        # Space complexity: Changes happen in-place O(1)
+        # m is len(obstacleGrid), n is len(obstacleGrid[0])
+        if obstacleGrid[0][0] == 0: obstacleGrid[0][0] = -1
+        for i in range(len(obstacleGrid)):
+            for j in range(len(obstacleGrid[0])):
                 if obstacleGrid[i][j] == 0:
-                    row[j] = row[j - 1] + row_above[j]
+                    # Not an obstacle
+                    if j > 0 and obstacleGrid[i][j-1] < 0:
+                        # Paths from left
+                        obstacleGrid[i][j] += obstacleGrid[i][j-1]
+                    if i > 0 and obstacleGrid[i-1][j] < 0:
+                        # Paths from above
+                        obstacleGrid[i][j] += obstacleGrid[i-1][j]
 
-            row_above = row
-
-        return row_above[-1]
+        if obstacleGrid[-1][-1] < 0: return -obstacleGrid[-1][-1]
+        else: return 0
