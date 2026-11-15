@@ -1,14 +1,19 @@
 class Solution:
     def minEatingSpeed(self, piles: list[int], h: int) -> int:
-        i = 1
-        j = max(piles)
-        while i < j: 
-            m = i + (j - i)//2
-            hours = sum([x // m if x % m == 0 else x // m + 1 for x in piles])
-            if hours <= h: 
-                j = m
-            else:
-                i = m + 1
-        
-        return i
-            
+        # Time complexity: Loop over piles + Binary search O(n)
+        # Space complexity: Create array for sum O(n)
+        # n = len(piles)
+
+        # Edge cases
+
+        # Main code
+        l, r = 1, max(piles)+1
+        while l < r:
+            m = (l + r)//2
+            time = sum([x//m if x%m == 0 else x//m + 1 for x in piles])
+            if time > h: 
+                l = m + 1
+            else: 
+                r = m 
+
+        return l
